@@ -29,12 +29,12 @@ void insert(Dictionary_liter* root, std::string key) {
 
 // Возврашает true если ключ есть в дереве, иначе false
 bool search(Dictionary_liter* root, std::string key) {
-	struct Dictionary_liter* list = root;
+	struct Dictionary_liter* liter = root;
 	for (int i = 0; i < key.length(); i++) {
 		int index = key[i] - a;
-		if (!list->child[index]) return false;
-		list = list->child[index];
+		if (!liter->child[index]) return false;
+		liter = liter->child[index];
 	}
 
-	return (list != nullptr && list->end_word);
+	return (liter != nullptr && liter->end_word);
 }
