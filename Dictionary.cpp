@@ -8,6 +8,7 @@ Dictionary_liter* get_new_liter(void)
 	return nullptr;
 	for (int i = 0; i < size_alphabet; i++) {
 		liter->child[i] = nullptr;
+
 		return liter;
 	}
 }
@@ -18,8 +19,7 @@ void insert(Dictionary_liter* root, std::string key) {
 
 	for (int i = 0; i < key.length(); i++) {
 		int index = key[i] - a;
-		if (!liter->child[index])
-			liter->child[index] = get_new_liter();
+		if (!liter->child[index]) liter->child[index] = get_new_liter();
 
 		liter = liter->child[index];
 	}
@@ -33,6 +33,7 @@ bool search(Dictionary_liter* root, std::string key) {
 	for (int i = 0; i < key.length(); i++) {
 		int index = key[i] - a;
 		if (!liter->child[index]) return false;
+
 		liter = liter->child[index];
 	}
 
