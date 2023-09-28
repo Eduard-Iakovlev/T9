@@ -4,6 +4,7 @@
 
 const int size_alphabet{ 33 };
 const char a = 'а'; // русская а
+const char z = 'я';
 
 // структура словаря
 struct Dictionary_liter {
