@@ -1,17 +1,20 @@
 #pragma once
+#include <iostream>
 #include <string>
+#include <vector>
 
 
-const int size_alphabet{ 33 };
-const char a = 'а'; // русска€ а
+const int ALPHABET_SIZE{ 66 };
+const char a = 'ј'; // русска€ а
 const char z = '€';
 
 // структура словар€
 struct Dictionary_liter {
-	struct Dictionary_liter* child[size_alphabet];
+	struct Dictionary_liter* child[ALPHABET_SIZE];
 	bool end_word;
 };
 
 Dictionary_liter* get_new_liter(void);
 void insert(Dictionary_liter*, std::string);
 bool search(Dictionary_liter*, std::string);
+std::vector<std::string> find_suffixes(Dictionary_liter*, std::string, std::string);

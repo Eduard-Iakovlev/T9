@@ -2,13 +2,21 @@
 
 Text::Text(char first_simbol, char last_simbol) : _first_simbol{ first_simbol }, _last_simbol{ last_simbol } {}
 
-std::string Text::input()
+std::string Text::input(Dictionary_liter* root)
 {
 	while (true) {
 		_str[_counter] = _getch();
+		std::string temp_str{};
+		std::string temp_currentSuffix = "";
 
 		if (_str[_counter] >= _first_simbol && _str[_counter] <= _last_simbol) {
 			std::cout << _str[_counter];
+			temp_str = std::string(_str);
+			_suffixes = find_suffixes(root, temp_str, temp_currentSuffix);
+			std::cout << " 0 - продолжить самостоятельно ";
+			for (int i = 0; i < _suffixes.size(); i++) {
+				std::cout << i+1 << " - " << temp_str << _suffixes[i];
+			}
 			_counter++;
 		}
 		else if (_str[_counter] == _back_space) {
@@ -32,5 +40,20 @@ std::string Text::input()
 	}
 
 	return std::string(_str);
+}
+
+int Text::chois(int lenght)
+{
+	int select{ 0 };
+	std::cout << " выберите действиеЖ: ";
+	while (true) {
+		std::cin >> select;
+		if (select < 0 || select > lenght + 1) {
+			std::cout << " Не корректный выбор, повторите: ";
+		}
+		else break;
+	}
+
+	return select;
 }
 
