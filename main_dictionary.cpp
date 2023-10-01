@@ -13,10 +13,8 @@ int main() {
 	// вставляем слова в словарь
 	for (int i = 0; i < words.size(); i++) insert(dictionary, words[i]);
 
-	std::string d = "при";
-	std::string dd{};
-	std::vector<std::string> s{};
+	Text text(a, z);
+	text.input(dictionary);
 
-	find_suffixes(dictionary, d, s, "");
-	for (int i = 0; i < s.size(); i++) std::cout << s[i] << " ";
+
 }

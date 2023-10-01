@@ -1,6 +1,7 @@
 #include "Input_text.h"
 
-Text::Text(char first_simbol, char last_simbol) : _first_simbol{ first_simbol }, _last_simbol{ last_simbol } {}
+Text::Text(char first_simbol, char last_simbol)
+	: _first_simbol{ first_simbol }, _last_simbol{ last_simbol } {}
 
 std::string Text::input(Dictionary_liter* root)
 {
@@ -13,9 +14,9 @@ std::string Text::input(Dictionary_liter* root)
 			std::cout << _str[_counter];
 			temp_str = std::string(_str);
 			find_suffixes(root, temp_str, _suffixes, "");
-			std::cout << " 0 - продолжить самостоятельно ";
+			std::cout << "\n 0 - продолжить самостоятельно ";
 			for (int i = 0; i < _suffixes.size(); i++) {
-				std::cout << i+1 << " - " << temp_str << _suffixes[i];
+				std::cout << i+1 << " - " << _suffixes[i] << " ";
 			}
 			_counter++;
 		}
