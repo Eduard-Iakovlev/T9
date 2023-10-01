@@ -1,5 +1,7 @@
 #include "Input_text.h"
 #include "Function.h"
+#include <limits> 
+#undef max
 
 Text::Text(char first_simbol, char last_simbol)
 	: _first_simbol{ first_simbol }, _last_simbol{ last_simbol } {}
@@ -73,10 +75,11 @@ int Text::chois(int lenght)
 		std::cin >> select;
 		if (std::cin.fail()) {
 			std::cout << " нужно ввести номер из предложенных вариантов: ";
-			select = 0;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Очистка буфера ввода
 			continue;
 		}
-		else if (select > lenght) {
+		else if (select > lenght || select < 0) {
 			std::cout << " выбирете из предложенных значений: ";
 			select = 0;
 			continue;
