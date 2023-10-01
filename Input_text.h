@@ -10,7 +10,7 @@ class Text {
 public:
 	Text(char first_simbol, char last_simbol);
 	int chois(int);
-	std::string input(Dictionary_liter*);
+	std::string input(Dictionary_liter*, std::vector<std::string>&);
 private:
 	char _first_simbol{};
 	char _last_simbol{};

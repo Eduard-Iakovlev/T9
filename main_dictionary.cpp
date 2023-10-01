@@ -2,6 +2,7 @@
 #include "Windows.h"
 #include "Dictionary.h"
 #include "Input_text.h"
+#include "Function.h"
 
 int main() {
 	SetConsoleOutputCP(1251);
@@ -18,11 +19,10 @@ int main() {
 	std::vector<std::string> str{};
 
 	while (true) {
-		str.push_back(text.input(dictionary));
+		str.push_back(text.input(dictionary, str));
 		if (!search(dictionary, str[counter])) insert(dictionary, str[counter]);
 		counter++;
-		system("cls");
-		for (int i = 0; i < str.size(); i++) std::cout << str[i] << " ";
+		printing(str);
 	}
 	
 	

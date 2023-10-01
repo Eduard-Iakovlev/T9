@@ -1,11 +1,14 @@
 #include "Input_text.h"
+#include "Function.h"
 
 Text::Text(char first_simbol, char last_simbol)
 	: _first_simbol{ first_simbol }, _last_simbol{ last_simbol } {}
 
-std::string Text::input(Dictionary_liter* root)
+std::string Text::input(Dictionary_liter* root, std::vector<std::string>& str)
 {
 	for (int i = 0; i < 33; i++) _str[i] = '\0';
+	_counter = 0;
+	_suffixes.clear();
 	
 	while (true) {
 		_str[_counter] = _getch();
@@ -13,13 +16,20 @@ std::string Text::input(Dictionary_liter* root)
 		if (_str[_counter] >= _first_simbol && _str[_counter] <= _last_simbol) {
 			std::cout << _str[_counter];
 			find_suffixes(root, _str, _suffixes, "");
-			if (_suffixes.size() > 0) { // нужно определять суффикс
+			if (_suffixes.size() > 0) { 
 				std::cout << "\n 0 - продолжить самостоятельно\n";
 				for (int i = 0; i < _suffixes.size(); i++) {
 					std::cout << i + 1 << " - " << _suffixes[i] << " ";
 				}
-				select = chois(_suffixes.size());
-				// реализовать действия на основе выбора
+				select = chois(_suffixes.size()) - 1;
+				if (select == -1) {
+					_suffixes.clear();
+					printing(str);
+					for (int i = 0; i < _counter; i++) std::cout << _str[i];
+					_counter++;
+					continue;
+				}
+				return _suffixes[select];
 				break;
 			}
 			else{
@@ -46,8 +56,6 @@ std::string Text::input(Dictionary_liter* root)
 			std::cout << " " << "\b";
 		}
 	}
-	_counter = 0;
-	_suffixes.clear();
 	return std::string(_str);
 }
 
