@@ -9,6 +9,7 @@ std::string Text::input(Dictionary_liter* root, std::vector<std::string>& str)
 	for (int i = 0; i < 33; i++) _str[i] = '\0';
 	_counter = 0;
 	_suffixes.clear();
+	select = 0;
 	
 	while (true) {
 		_str[_counter] = _getch();
@@ -21,11 +22,11 @@ std::string Text::input(Dictionary_liter* root, std::vector<std::string>& str)
 				for (int i = 0; i < _suffixes.size(); i++) {
 					std::cout << i + 1 << " - " << _suffixes[i] << " ";
 				}
-				select = chois(_suffixes.size()) - 1;
+				select = chois(_suffixes.size())-1;
 				if (select == -1) {
 					_suffixes.clear();
 					printing(str);
-					for (int i = 0; i < _counter; i++) std::cout << _str[i];
+					for (int i = 0; i <= _counter; i++) std::cout << _str[i];
 					_counter++;
 					continue;
 				}
@@ -51,6 +52,11 @@ std::string Text::input(Dictionary_liter* root, std::vector<std::string>& str)
 				break;
 			}
 		}
+		else if (_str[_counter] == _esc) {
+			_str[0] = 'ь';
+			_str[1] = '\0';
+			break;
+		}
 		else {
 			_str[_counter] = '\0';
 			std::cout << " " << "\b";
@@ -61,16 +67,22 @@ std::string Text::input(Dictionary_liter* root, std::vector<std::string>& str)
 
 int Text::chois(int lenght)
 {
-	int select{ 0 };
+	select = 0;
 	std::cout << "\n выберите действие: ";
 	while (true) {
 		std::cin >> select;
-		if (select < 0 || select > lenght) {
-			std::cout << " Ќе корректный выбор, повторите: ";
+		if (std::cin.fail()) {
+			std::cout << " нужно ввести номер из предложенных вариантов: ";
+			select = 0;
+			continue;
+		}
+		else if (select > lenght) {
+			std::cout << " выбирете из предложенных значений: ";
+			select = 0;
+			continue;
 		}
 		else break;
 	}
-
 	return select;
 }
 

@@ -19,11 +19,15 @@ int main() {
 	std::vector<std::string> str{};
 
 	while (true) {
+		printing(str);
 		str.push_back(text.input(dictionary, str));
+		if (str[str.size() - 1] == "ь") break; // требует доработки на безопасность кода
 		if (!search(dictionary, str[counter])) insert(dictionary, str[counter]);
 		counter++;
-		printing(str);
 	}
+
+	system("cls");
+	std::cout << "\n\n\n\n\n               Всего хорошего!";
 	
 	
 }
