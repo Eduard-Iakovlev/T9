@@ -5,12 +5,12 @@ Dictionary_liter* get_new_liter(void)
 {
 	struct Dictionary_liter* liter = new Dictionary_liter;
 	liter->end_word = false;
-	return nullptr;
+	//return nullptr;
 	for (int i = 0; i < ALPHABET_SIZE; i++) {
 		liter->child[i] = nullptr;
 
-		return liter;
 	}
+		return liter;
 }
 
 // Вставляет ключ в дерево, если его нет, 
@@ -40,27 +40,23 @@ bool search(Dictionary_liter* root, std::string key) {
 	return (liter != nullptr && liter->end_word);
 }
 
+
 // Поиск суффиксов
- std::vector<std::string> find_suffixes(Dictionary_liter* root, std::string prefix, std::string currentSuffix) {
-		std::vector<std::string> suffixes{};
-	if (!root) return suffixes;
-	if (prefix.empty()) {
-		if (root->end_word) {
-			suffixes.push_back(currentSuffix);
-		}
-		for (int i = 0; i < ALPHABET_SIZE; i++) {
-			if (root->child[i]) {
-				char ch = a + i;
-				find_suffixes(root, prefix, currentSuffix);
-			}
-		}
-	}
-	else {
-		char nextChar = prefix[0];
-		int index = nextChar - a;
+void find_suffixes(Dictionary_liter* root, std::string prefix,
+	std::vector<std::string>& suffixes, std::string currentSuffix) {
+	if (!root) return;
+	if (!prefix.empty()) {
+		int index = prefix[0] - a;
 		if (root->child[index]) {
-			find_suffixes(root->child[index], prefix.substr(1), currentSuffix + nextChar);
+			currentSuffix += prefix[0];
+			find_suffixes(root->child[index], prefix.substr(1), suffixes, currentSuffix);
+		}
+		else return;
+	} 
+	else {
+		if (root->end_word) suffixes.push_back(currentSuffix);
+		for (int i = 0; i < ALPHABET_SIZE; ++i) {
+			if (root->child[i]) find_suffixes(root->child[i], "", suffixes, currentSuffix + char(a + i));
 		}
 	}
-	return suffixes;
 }

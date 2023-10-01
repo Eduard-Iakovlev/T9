@@ -9,11 +9,13 @@ int main() {
 	
 
 	Dictionary_liter* dictionary = get_new_liter();
-	std::vector<std::string> words {"привет", "пока", "сегодн€", "завтра", "јнна", "»ван", "спасибо", "пожалуйста", "как", "дела", "погода", "настроение", "настрой", "доброе", "добрый", "утро", "вечер"};
-	//int lenght_words = sizeof(words) / sizeof(words[0]);
-
+	std::vector<std::string> words {"привет", "приправа", "прима", "пока", "сегодн€", "завтра", "јнна", "»ван", "спасибо", "пожалуйста", "как", "дела", "погода", "настроение", "настрой", "доброе", "добрый", "утро", "вечер"};
 	// вставл€ем слова в словарь
 	for (int i = 0; i < words.size(); i++) insert(dictionary, words[i]);
 
-	Text text(a, z);
+	std::string d = "при";
+	std::string dd{};
+	std::vector<std::string> s{};
+
+	//for (int i = 0; i < s.size(); i++) std::cout << s[i];
 }

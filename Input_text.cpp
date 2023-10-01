@@ -4,15 +4,15 @@ Text::Text(char first_simbol, char last_simbol) : _first_simbol{ first_simbol },
 
 std::string Text::input(Dictionary_liter* root)
 {
+		std::string temp_str{};
+		std::string temp_currentSuffix{};
 	while (true) {
 		_str[_counter] = _getch();
-		std::string temp_str{};
-		std::string temp_currentSuffix = "";
 
 		if (_str[_counter] >= _first_simbol && _str[_counter] <= _last_simbol) {
 			std::cout << _str[_counter];
 			temp_str = std::string(_str);
-			_suffixes = find_suffixes(root, temp_str, temp_currentSuffix);
+			_suffixes = find_suffixes(root, temp_str);
 			std::cout << " 0 - продолжить самостоятельно ";
 			for (int i = 0; i < _suffixes.size(); i++) {
 				std::cout << i+1 << " - " << temp_str << _suffixes[i];
