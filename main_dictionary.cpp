@@ -17,5 +17,6 @@ int main() {
 	std::string dd{};
 	std::vector<std::string> s{};
 
-	//for (int i = 0; i < s.size(); i++) std::cout << s[i];
+	find_suffixes(dictionary, d, s, "");
+	for (int i = 0; i < s.size(); i++) std::cout << s[i] << " ";
 }

@@ -12,7 +12,7 @@ std::string Text::input(Dictionary_liter* root)
 		if (_str[_counter] >= _first_simbol && _str[_counter] <= _last_simbol) {
 			std::cout << _str[_counter];
 			temp_str = std::string(_str);
-			_suffixes = find_suffixes(root, temp_str);
+			find_suffixes(root, temp_str, _suffixes, "");
 			std::cout << " 0 - продолжить самостоятельно ";
 			for (int i = 0; i < _suffixes.size(); i++) {
 				std::cout << i+1 << " - " << temp_str << _suffixes[i];
