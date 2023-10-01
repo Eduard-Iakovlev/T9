@@ -14,7 +14,16 @@ int main() {
 	for (int i = 0; i < words.size(); i++) insert(dictionary, words[i]);
 
 	Text text(a, z);
-	text.input(dictionary);
+	int counter{ 0 };
+	std::vector<std::string> str{};
 
-
+	while (true) {
+		str.push_back(text.input(dictionary));
+		if (!search(dictionary, str[counter])) insert(dictionary, str[counter]);
+		counter++;
+		system("cls");
+		for (int i = 0; i < str.size(); i++) std::cout << str[i] << " ";
+	}
+	
+	
 }

@@ -5,22 +5,29 @@ Text::Text(char first_simbol, char last_simbol)
 
 std::string Text::input(Dictionary_liter* root)
 {
-		std::string temp_str{};
-		std::string temp_currentSuffix{};
+	for (int i = 0; i < 33; i++) _str[i] = '\0';
+	
 	while (true) {
 		_str[_counter] = _getch();
 
 		if (_str[_counter] >= _first_simbol && _str[_counter] <= _last_simbol) {
 			std::cout << _str[_counter];
-			temp_str = std::string(_str);
-			find_suffixes(root, temp_str, _suffixes, "");
-			std::cout << "\n 0 - продолжить самостоятельно ";
-			for (int i = 0; i < _suffixes.size(); i++) {
-				std::cout << i+1 << " - " << _suffixes[i] << " ";
+			find_suffixes(root, _str, _suffixes, "");
+			if (_suffixes.size() > 0) { // нужно определять суффикс
+				std::cout << "\n 0 - продолжить самостоятельно\n";
+				for (int i = 0; i < _suffixes.size(); i++) {
+					std::cout << i + 1 << " - " << _suffixes[i] << " ";
+				}
+				select = chois(_suffixes.size());
+				// реализовать действия на основе выбора
+				break;
 			}
-			_counter++;
+			else{
+				_counter++;
+				continue;
+			}
 		}
-		else if (_str[_counter] == _back_space) {
+		if (_str[_counter] == _back_space) {
 			if (_counter == 0) continue;
 			else {
 				std::cout << "\b" << " " << "\b";
@@ -28,7 +35,7 @@ std::string Text::input(Dictionary_liter* root)
 			}
 		}
 		else if (_str[_counter] == _enter || _str[_counter] == _space) {
-			if (_str[0] == _enter) continue;
+			if (_str[0] == _enter || _str[0] == _space) continue;
 			else {
 				_str[_counter] = '\0';
 				break;
@@ -39,17 +46,18 @@ std::string Text::input(Dictionary_liter* root)
 			std::cout << " " << "\b";
 		}
 	}
-
+	_counter = 0;
+	_suffixes.clear();
 	return std::string(_str);
 }
 
 int Text::chois(int lenght)
 {
 	int select{ 0 };
-	std::cout << " выберите действиеЖ: ";
+	std::cout << "\n выберите действие: ";
 	while (true) {
 		std::cin >> select;
-		if (select < 0 || select > lenght + 1) {
+		if (select < 0 || select > lenght) {
 			std::cout << " Не корректный выбор, повторите: ";
 		}
 		else break;

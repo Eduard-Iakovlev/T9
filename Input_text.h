@@ -17,8 +17,9 @@ private:
 	const char _back_space{ 8 };
 	const char _enter{ 13 };
 	const char _space{ 32 };
-	char _str[256]{};
+	char _str[33]{};
 	int _counter{ 0 };
+	int select{ 0 };
 	std::vector<std::string> _suffixes{};
 	
 };

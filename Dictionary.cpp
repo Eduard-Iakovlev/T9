@@ -13,20 +13,6 @@ Dictionary_liter* get_new_liter(void)
 		return liter;
 }
 
-// Вставляет ключ в дерево, если его нет, 
-void insert(Dictionary_liter* root, std::string key) {
-	Dictionary_liter* liter = root;
-
-	for (int i = 0; i < key.length(); i++) {
-		int index = key[i] - a;
-		if (!liter->child[index]) liter->child[index] = get_new_liter();
-
-		liter = liter->child[index];
-	}
-
-	liter->end_word = true;
-}
-
 // Возврашает true если ключ есть в дереве, иначе false
 bool search(Dictionary_liter* root, std::string key) {
 	struct Dictionary_liter* liter = root;
@@ -39,8 +25,6 @@ bool search(Dictionary_liter* root, std::string key) {
 
 	return (liter != nullptr && liter->end_word);
 }
-
-
 // Поиск суффиксов
 void find_suffixes(Dictionary_liter* root, std::string prefix,
 	std::vector<std::string>& suffixes, std::string currentSuffix) {
@@ -59,4 +43,17 @@ void find_suffixes(Dictionary_liter* root, std::string prefix,
 			if (root->child[i]) find_suffixes(root->child[i], "", suffixes, currentSuffix + char(a + i));
 		}
 	}
+}
+// Вставляет ключ в дерево, если его нет, 
+void insert(Dictionary_liter* root, std::string key) {
+	Dictionary_liter* liter = root;
+
+	for (int i = 0; i < key.length(); i++) {
+		int index = key[i] - a;
+		if (!liter->child[index]) liter->child[index] = get_new_liter();
+
+		liter = liter->child[index];
+	}
+
+	liter->end_word = true;
 }
