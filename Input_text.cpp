@@ -75,7 +75,7 @@ int Text::chois(int lenght)
 		std::cin >> select;
 		if (std::cin.fail()) {
 			std::cout << " нужно ввести номер из предложенных вариантов: ";
-			std::cin.clear();
+			std::cin.clear(); //снятие флвгв
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Очистка буфера ввода
 			continue;
 		}
