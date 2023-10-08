@@ -1,5 +1,7 @@
 #include "Function.h"
 
+// function print
+
 void printing(std::vector < std::string>& str)
 {
 	system("cls");
