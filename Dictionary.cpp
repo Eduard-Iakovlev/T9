@@ -25,7 +25,7 @@ bool search(Dictionary_liter* root, std::string key) {
 
 	return (liter != nullptr && liter->end_word);
 }
-// Поиск суффиксов
+// Поиск суффиксов по заданному префиксу если есть ключ
 void find_suffixes(Dictionary_liter* root, std::string prefix,
 	std::vector<std::string>& suffixes, std::string currentSuffix) {
 	if (!root) return;
